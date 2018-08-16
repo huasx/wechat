@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/silenceper/wechat/context"
-	"github.com/silenceper/wechat/util"
+	"github.com/huasx/wechat/context"
+	"github.com/huasx/wechat/util"
 )
 
 const (

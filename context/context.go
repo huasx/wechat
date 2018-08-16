@@ -5,8 +5,8 @@ import (
 	"sync"
 
 	"encoding/xml"
-	"github.com/silenceper/wechat/cache"
-	"github.com/silenceper/wechat/message"
+	"github.com/huasx/wechat/cache"
+	"github.com/huasx/wechat/message"
 )
 
 // Context struct
