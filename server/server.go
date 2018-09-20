@@ -97,6 +97,7 @@ func (srv *Server) handleRequest() (reply *message.Reply, err error) {
 		err = errors.New("消息类型转换失败")
 	}
 	srv.requestMsg = mixMessage
+	srv.Context.BaseMessage = &mixMessage
 	reply = srv.messageHandler(srv.Context)
 	return
 }

@@ -35,6 +35,11 @@ type Context struct {
 }
 
 func (ctx *Context) ResolveMsg(src interface{}) error {
+	if ctx.BaseMessage == nil {
+		ctx.BaseMessage = &message.BaseMessage{}
+		xml.Unmarshal(ctx.RequestRawXMLMsg, ctx.BaseMessage)
+	}
+
 	return xml.Unmarshal(ctx.RequestRawXMLMsg, src)
 }
 
