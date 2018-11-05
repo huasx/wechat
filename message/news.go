@@ -40,12 +40,11 @@ type Article struct {
 	URL         string `xml:"Url,omitempty" json:"Url,omitempty"`
 }
 
-//NewArticle 初始化文章
-func NewArticle(jsContent string) ([]*Article, error) {
+func NewNewsByJson(js string) (*News, error) {
 	article := make([]*Article, 0)
-	if err := json.Unmarshal([]byte(jsContent), &article); err != nil {
+	if err := json.Unmarshal([]byte(js), &article); err != nil {
 		return nil, err
 	}
 
-	return article, nil
+	return NewNews(article), nil
 }
