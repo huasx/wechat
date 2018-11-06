@@ -10,6 +10,6 @@ var ErrUnsupportReply = errors.New("不支持的回复消息")
 
 //Reply 消息回复
 type Reply struct {
-	MsgType MsgType
+	MsgType string
 	MsgData interface{}
 }

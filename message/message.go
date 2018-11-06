@@ -9,17 +9,17 @@ type MsgType string
 type EventType string
 
 const (
-	MsgTypeText       MsgType = "text"                      //MsgTypeText 表示文本消息
-	MsgTypeImage      MsgType = "image"                     //MsgTypeImage 表示图片消息
-	MsgTypeVoice      MsgType = "voice"                     //MsgTypeVoice 表示语音消息
-	MsgTypeVideo      MsgType = "video"                     //MsgTypeVideo 表示视频消息
-	MsgTypeShortVideo MsgType = "shortvideo"                //MsgTypeShortVideo 表示短视频消息[限接收]
-	MsgTypeLocation   MsgType = "location"                  //MsgTypeLocation 表示坐标消息[限接收]
-	MsgTypeLink       MsgType = "link"                      //MsgTypeLink 表示链接消息[限接收]
-	MsgTypeMusic      MsgType = "music"                     //MsgTypeMusic 表示音乐消息[限回复]
-	MsgTypeNews       MsgType = "news"                      //MsgTypeNews 表示图文消息[限回复]
-	MsgTypeTransfer   MsgType = "transfer_customer_service" //MsgTypeTransfer 表示消息消息转发到客服
-	MsgTypeEvent      MsgType = "event"                     //MsgTypeEvent 表示事件推送消息
+	MsgTypeText       = "text"                      //MsgTypeText 表示文本消息
+	MsgTypeImage      = "image"                     //MsgTypeImage 表示图片消息
+	MsgTypeVoice      = "voice"                     //MsgTypeVoice 表示语音消息
+	MsgTypeVideo      = "video"                     //MsgTypeVideo 表示视频消息
+	MsgTypeShortVideo = "shortvideo"                //MsgTypeShortVideo 表示短视频消息[限接收]
+	MsgTypeLocation   = "location"                  //MsgTypeLocation 表示坐标消息[限接收]
+	MsgTypeLink       = "link"                      //MsgTypeLink 表示链接消息[限接收]
+	MsgTypeMusic      = "music"                     //MsgTypeMusic 表示音乐消息[限回复]
+	MsgTypeNews       = "news"                      //MsgTypeNews 表示图文消息[限回复]
+	MsgTypeTransfer   = "transfer_customer_service" //MsgTypeTransfer 表示消息消息转发到客服
+	MsgTypeEvent      = "event"                     //MsgTypeEvent 表示事件推送消息
 )
 
 const (
@@ -91,23 +91,31 @@ type ResponseEncryptedXMLMsg struct {
 	Nonce        string   `xml:"Nonce"        json:"Nonce"`
 }
 
+type CDATA struct {
+	Value string `xml:",cdata"`
+}
+
 // CommonToken 消息中通用的结构
 type CommonToken struct {
 	XMLName      xml.Name `xml:"xml"`
-	ToUserName   string   `xml:"ToUserName"`
-	FromUserName string   `xml:"FromUserName"`
+	ToUserName   CDATA    `xml:"ToUserName"`
+	FromUserName CDATA    `xml:"FromUserName"`
 	CreateTime   int64    `xml:"CreateTime"`
-	MsgType      MsgType  `xml:"MsgType"`
+	MsgType      CDATA    `xml:"MsgType"`
 }
 
 //SetToUserName set ToUserName
 func (msg *CommonToken) SetToUserName(toUserName string) {
-	msg.ToUserName = toUserName
+	msg.ToUserName = CDATA{
+		Value: toUserName,
+	}
 }
 
 //SetFromUserName set FromUserName
 func (msg *CommonToken) SetFromUserName(fromUserName string) {
-	msg.FromUserName = fromUserName
+	msg.FromUserName = CDATA{
+		Value: fromUserName,
+	}
 }
 
 //SetCreateTime set createTime
@@ -116,6 +124,8 @@ func (msg *CommonToken) SetCreateTime(createTime int64) {
 }
 
 //SetMsgType set MsgType
-func (msg *CommonToken) SetMsgType(msgType MsgType) {
-	msg.MsgType = msgType
+func (msg *CommonToken) SetMsgType(msgType string) {
+	msg.MsgType = CDATA{
+		Value: msgType,
+	}
 }
