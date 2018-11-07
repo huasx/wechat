@@ -7,7 +7,7 @@ type Image struct {
 	CommonToken
 
 	Image struct {
-		MediaID string `xml:"MediaId" json:"MediaId"`
+		MediaID CDATA `xml:"MediaId" json:"MediaId"`
 	} `xml:"Image"`
 }
 
@@ -16,9 +16,9 @@ type MpImage struct {
 }
 
 //NewImage 回复图片消息
-func NewImage(mediaID string) *Image {
+func NewImage(MpImage *MpImage) *Image {
 	image := new(Image)
-	image.Image.MediaID = mediaID
+	image.Image.MediaID = CDATA{Value: MpImage.MediaID}
 	return image
 }
 
@@ -28,5 +28,5 @@ func NewImageByJson(js string) (*Image, error) {
 		return nil, err
 	}
 
-	return NewImage(MpImage.MediaID), nil
+	return NewImage(MpImage), nil
 }

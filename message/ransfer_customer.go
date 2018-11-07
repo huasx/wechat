@@ -15,6 +15,7 @@ type TransInfo struct {
 //NewTransferCustomer 实例化
 func NewTransferCustomer(KfAccount string) *TransferCustomer {
 	tc := new(TransferCustomer)
+	//暂不实现指定客服
 	if KfAccount != "" {
 		transInfo := new(TransInfo)
 		transInfo.KfAccount = KfAccount
