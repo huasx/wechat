@@ -14,14 +14,14 @@ type News struct {
 }
 
 //NewNews 初始化图文消息
-func NewNews(articles []*Article) *News {
+func NewNews(MpArticle []*MpArticle) *News {
 	articleContent := make([]*Article, 0)
-	for _, value := range articles {
+	for _, value := range MpArticle {
 		a := &Article{}
-		a.URL = value.URL
-		a.PicURL = weixin.StaticHost + value.PicURL + weixin.OssThumbNail
-		a.Title = value.Title
-		a.Description = value.Description
+		a.URL = CDATA{Value: value.URL}
+		a.Title = CDATA{Value: value.Title}
+		a.Description = CDATA{Value: value.Description}
+		a.PicURL = CDATA{Value: weixin.StaticHost + value.PicURL + weixin.OssThumbNail}
 		articleContent = append(articleContent, a)
 		break
 	}
@@ -32,19 +32,25 @@ func NewNews(articles []*Article) *News {
 	return news
 }
 
-//Article 单篇文章
+//Article 单篇文章 都是必传参数
 type Article struct {
-	Title       string `xml:"Title,omitempty" json:"Title,omitempty"`
-	Description string `xml:"Description,omitempty" json:"Description,omitempty"`
-	PicURL      string `xml:"PicUrl,omitempty" json:"PicUrl,omitempty"`
-	URL         string `xml:"Url,omitempty" json:"Url,omitempty"`
+	Title       CDATA `xml:"Title" json:"Title"`
+	Description CDATA `xml:"Description" json:"Description"`
+	PicURL      CDATA `xml:"PicUrl" json:"PicUrl"`
+	URL         CDATA `xml:"Url" json:"Url"`
+}
+
+type MpArticle struct {
+	Title       string `xml:"Title" json:"Title"`
+	Description string `xml:"Description" json:"Description"`
+	PicURL      string `xml:"PicUrl" json:"PicUrl"`
+	URL         string `xml:"Url" json:"Url"`
 }
 
 func NewNewsByJson(js string) (*News, error) {
-	article := make([]*Article, 0)
-	if err := json.Unmarshal([]byte(js), &article); err != nil {
+	MpArticle := make([]*MpArticle, 0)
+	if err := json.Unmarshal([]byte(js), &MpArticle); err != nil {
 		return nil, err
 	}
-
-	return NewNews(article), nil
+	return NewNews(MpArticle), nil
 }
