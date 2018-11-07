@@ -13,17 +13,17 @@ type MpText struct {
 }
 
 //NewText 初始化文本消息
-func NewText(content CDATA) *Text {
+func NewText(MpText *MpText) *Text {
 	text := new(Text)
-	text.Content = content
+	text.Content = CDATA{Value:MpText.Content}
 	return text
 }
 
 //传入json格式 返回固定的微信格式
 func NewTextByJson(jsContent string) (*Text, error) {
-	text := &MpText{}
-	if err := json.Unmarshal([]byte(jsContent), text); err != nil {
+	MpText := &MpText{}
+	if err := json.Unmarshal([]byte(jsContent), MpText); err != nil {
 		return nil, err
 	}
-	return NewText(CDATA{Value: text.Content}), nil
+	return NewText(MpText), nil
 }
