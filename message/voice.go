@@ -7,7 +7,7 @@ type Voice struct {
 	CommonToken
 
 	Voice struct {
-		MediaID string `xml:"MediaId" json:"MediaId"`
+		MediaID CDATA `xml:"MediaId" json:"MediaId"`
 	} `xml:"Voice"`
 }
 
@@ -16,9 +16,9 @@ type MpVoice struct {
 }
 
 //NewVoice 回复语音消息
-func NewVoice(mediaID string) *Voice {
+func NewVoice(MpVoice *MpVoice) *Voice {
 	voice := new(Voice)
-	voice.Voice.MediaID = mediaID
+	voice.Voice.MediaID = CDATA{Value:MpVoice.MediaID}
 	return voice
 }
 
@@ -28,5 +28,5 @@ func NewVoiceByJson(js string) (*Voice, error) {
 		return nil, err
 	}
 
-	return NewVoice(voice.MediaID), nil
+	return NewVoice(voice), nil
 }
