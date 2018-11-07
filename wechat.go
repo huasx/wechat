@@ -23,8 +23,10 @@ type Wechat struct {
 
 // Config for user
 type Config struct {
-	AppID          string
-	AppSecret      string
+	AppID string
+	//AppSecret      string//弃用 安全级别高
+	ClientCode     string
+	ClientSecret   string
 	Token          string
 	EncodingAESKey string
 	PayMchID       string //支付 - 商户 ID
@@ -35,19 +37,21 @@ type Config struct {
 
 // NewWechat init
 func NewWechat(cfg *Config) *Wechat {
-	context := new(context.Context)
-	copyConfigToContext(cfg, context)
-	return &Wechat{context}
+	ctx := new(context.Context)
+	copyConfigToContext(cfg, ctx)
+	return &Wechat{ctx}
 }
 
 func copyConfigToContext(cfg *Config, context *context.Context) {
 	context.AppID = cfg.AppID
-	context.AppSecret = cfg.AppSecret
+	//context.AppSecret = cfg.AppSecret
+	context.ClientCode = cfg.ClientCode
+	context.ClientSecret = cfg.ClientSecret
 	context.Token = cfg.Token
 	context.EncodingAESKey = cfg.EncodingAESKey
-	context.PayMchID = cfg.PayMchID
-	context.PayKey = cfg.PayKey
-	context.PayNotifyURL = cfg.PayNotifyURL
+	//context.PayMchID = cfg.PayMchID
+	//context.PayKey = cfg.PayKey
+	//context.PayNotifyURL = cfg.PayNotifyURL
 	context.Cache = cfg.Cache
 	context.SetAccessTokenLock(new(sync.RWMutex))
 	context.SetJsAPITicketLock(new(sync.RWMutex))

@@ -29,7 +29,10 @@ func (ctx *Context) SetAccessTokenLock(l *sync.RWMutex) {
 
 //GetAccessToken 获取access_token
 func (ctx *Context) GetAccessToken() (accessToken string, err error) {
-	ctx.accessTokenLock.Lock()
+	//从go接口获取token
+	wechat := weixin.NewWeixin()
+	return wechat.GetAccessToken(ctx.ClientCode, ctx.ClientSecret)
+	/*ctx.accessTokenLock.Lock()
 	defer ctx.accessTokenLock.Unlock()
 
 	accessTokenCacheKey := fmt.Sprintf("access_token_%s", ctx.AppID)
@@ -39,19 +42,15 @@ func (ctx *Context) GetAccessToken() (accessToken string, err error) {
 		return
 	}
 
-	//从go接口获取token
-	wechat := weixin.NewWeixin()
-	return wechat.GetAccessToken(ctx.ClientCode, ctx.ClientSecret)
-
 	//从微信服务器获取
-	/*	var resAccessToken ResAccessToken
-		resAccessToken, err = ctx.GetAccessTokenFromServer()
-		if err != nil {
-			return
-		}
+	var resAccessToken ResAccessToken
+	resAccessToken, err = ctx.GetAccessTokenFromServer()
+	if err != nil {
+		return
+	}
 
-		accessToken = resAccessToken.AccessToken
-		return*/
+	accessToken = resAccessToken.AccessToken
+	return*/
 }
 
 //GetAccessTokenFromServer 强制从微信服务器获取token

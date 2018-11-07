@@ -12,7 +12,7 @@ import (
 // Context struct
 type Context struct {
 	AppID          string
-	AppSecret      string
+	AppSecret      string //弃用 安全级别高
 	ClientCode     string
 	ClientSecret   string
 	Token          string
