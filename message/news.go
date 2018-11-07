@@ -17,11 +17,11 @@ type News struct {
 func NewNews(MpArticle []*MpArticle) *News {
 	articleContent := make([]*Article, 0)
 	for _, value := range MpArticle {
-		a := &Article{}
-		a.URL = CDATA{Value: value.URL}
-		a.Title = CDATA{Value: value.Title}
-		a.Description = CDATA{Value: value.Description}
-		a.PicURL = CDATA{Value: weixin.StaticHost + value.PicURL + weixin.OssThumbNail}
+		a 		       := &Article{}
+		a.URL 		   = CDATA{Value: value.URL}
+		a.Title 	   = CDATA{Value: value.Title}
+		a.Description  = CDATA{Value: value.Description}
+		a.PicURL 	   = CDATA{Value: weixin.StaticHost + value.PicURL + weixin.OssThumbNail}
 		articleContent = append(articleContent, a)
 		break
 	}
