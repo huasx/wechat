@@ -32,7 +32,7 @@ func hello(c *gin.Context) {
 	server.SetMessageHandler(func(msg message.MixMessage) *message.Reply {
 
 		//回复消息：演示回复用户发送的消息
-		text := message.NewText(message.CDATA{Value: msg.Content})
+		text := message.NewText(&message.MpText{Content: msg.Content})
 		return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
 	})
 
