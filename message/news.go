@@ -21,7 +21,7 @@ func NewNews(MpArticle []*MpArticle) *News {
 		a.URL = CDATA{Value: value.URL}
 		a.Title = CDATA{Value: value.Title}
 		a.Description = CDATA{Value: value.Description}
-		a.PicURL = CDATA{Value: weixin.StaticHost + value.PicURL + weixin.OssThumbNail}
+		a.PicURL  = CDATA{Value: weixin.StaticHost + value.PicURL + weixin.OssThumbNail}
 		articleContent = append(articleContent, a)
 		break
 	}
