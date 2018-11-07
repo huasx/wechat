@@ -1,12 +1,12 @@
 package context
 
 import (
+	"app/core/weixin"
 	"encoding/json"
 	"fmt"
+	"github.com/huasx/wechat/util"
 	"sync"
 	"time"
-
-	"github.com/huasx/wechat/util"
 )
 
 const (
@@ -39,15 +39,19 @@ func (ctx *Context) GetAccessToken() (accessToken string, err error) {
 		return
 	}
 
-	//从微信服务器获取
-	var resAccessToken ResAccessToken
-	resAccessToken, err = ctx.GetAccessTokenFromServer()
-	if err != nil {
-		return
-	}
+	//从go接口获取token
+	wechat := weixin.NewWeixin()
+	return wechat.GetAccessToken(ctx.ClientCode, ctx.ClientSecret)
 
-	accessToken = resAccessToken.AccessToken
-	return
+	//从微信服务器获取
+	/*	var resAccessToken ResAccessToken
+		resAccessToken, err = ctx.GetAccessTokenFromServer()
+		if err != nil {
+			return
+		}
+
+		accessToken = resAccessToken.AccessToken
+		return*/
 }
 
 //GetAccessTokenFromServer 强制从微信服务器获取token

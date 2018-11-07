@@ -13,6 +13,8 @@ import (
 type Context struct {
 	AppID          string
 	AppSecret      string
+	ClientCode     string
+	ClientSecret   string
 	Token          string
 	EncodingAESKey string
 	PayMchID       string
