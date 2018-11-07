@@ -34,7 +34,7 @@ func NewNews(MpArticle []*MpArticle) *News {
 
 //Article 单篇文章 都是必传参数
 type Article struct {
-	Title       CDATA `xml:"Title" json:"Title"`
+	Title       CDATA `xml:"Title" json:"Title1"`
 	Description CDATA `xml:"Description" json:"Description"`
 	PicURL      CDATA `xml:"PicUrl" json:"PicUrl"`
 	URL         CDATA `xml:"Url" json:"Url"`
