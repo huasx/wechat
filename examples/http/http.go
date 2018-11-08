@@ -13,7 +13,7 @@ func hello(rw http.ResponseWriter, req *http.Request) {
 	//配置微信参数
 	config := &wechat.Config{
 		AppID:          "your app id",
-		AppSecret:      "your app secret",
+		//AppSecret:      "your app secret",
 		Token:          "your token",
 		EncodingAESKey: "your encoding aes key",
 	}
