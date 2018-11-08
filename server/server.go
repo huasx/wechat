@@ -220,7 +220,7 @@ func (srv *Server) Send() (err error) {
 			return
 		}
 		//TODO 如果获取不到timestamp nonce 则自己生成
-		timestamp := srv.timestamp
+		timestamp    := srv.timestamp
 		timestampStr := strconv.FormatInt(timestamp, 10)
 		msgSignature := util.Signature(srv.Token, timestampStr, srv.nonce, string(encryptedMsg))
 		replyMsg = message.ResponseEncryptedXMLMsg{

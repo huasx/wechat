@@ -17,7 +17,7 @@ type MpImage struct {
 
 //NewImage 回复图片消息
 func NewImage(MpImage *MpImage) *Image {
-	image := new(Image)
+	image 			   := new(Image)
 	image.Image.MediaID = CDATA{Value: MpImage.MediaID}
 	return image
 }
