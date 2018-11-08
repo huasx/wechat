@@ -25,8 +25,7 @@ func hello(rw http.ResponseWriter, req *http.Request) {
 	server.SetMessageHandler(func(msg message.MixMessage) *message.Reply {
 
 		//回复消息：演示回复用户发送的消息
-		text := message.NewText(&message.MpText{Content: msg.Content})
-		return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
+		return &message.Reply{MsgType: message.MsgTypeText, MsgData: message.NewText(&message.MpText{Content: msg.Content})}
 	})
 
 	//处理消息接收以及回复
