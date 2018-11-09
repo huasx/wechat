@@ -47,6 +47,7 @@ func (ctx *Context) ResolveMsg(src interface{}) error {
 	return xml.Unmarshal(ctx.RequestRawXMLMsg, src)
 }
 
+
 // Query returns the keyed url query value if it exists
 func (ctx *Context) Query(key string) string {
 	value, _ := ctx.GetQuery(key)
