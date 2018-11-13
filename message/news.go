@@ -3,6 +3,7 @@ package message
 import (
 	"app/core/weixin"
 	"encoding/json"
+	"strings"
 )
 
 //News 图文消息
@@ -21,7 +22,13 @@ func NewNews(MpArticle []*MpArticle) *News {
 		a.URL          = CDATA{Value: value.URL}
 		a.Title        = CDATA{Value: value.Title}
 		a.Description  = CDATA{Value: value.Description}
-		a.PicURL       = CDATA{Value: weixin.StaticHost + value.PicURL + weixin.OssThumbNail}
+
+		if !strings.Contains(value.PicURL, "https://")  && !strings.Contains(value.PicURL, "http://") {
+			a.PicURL   = CDATA{Value: weixin.StaticHost + value.PicURL + weixin.OssThumbNail}
+		} else {
+			a.PicURL   = CDATA{Value: value.PicURL}
+		}
+
 		articleContent = append(articleContent, a)
 		break
 	}
